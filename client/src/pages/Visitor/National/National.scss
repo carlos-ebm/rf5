@@ -1,0 +1,26 @@
+@import "../../../scss/index.scss";
+
+/*.card-national {
+  margin-left: 40px;*/
+  .row {
+    &__left-news {
+        text-align: left;
+    &__right-news {
+      max-width: 300px;
+      margin: 10px 0 0 0;
+      &__ads {
+      }
+      &__related {
+        .ant-card-head{
+            background-color: rgb(25, 12, 71);
+            color: white;
+        }
+        margin-top: 10px;
+      }
+    }
+  }
+}
+
+.sponsors {
+  margin-top: 40px;
+}

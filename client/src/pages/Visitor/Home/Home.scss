@@ -1,0 +1,25 @@
+@import "../../../scss/index.scss";
+
+.row {
+  &__col-left {
+    text-align: left;
+    justify-content: center;
+    margin-left: 40px;
+
+    &__principal {
+    }
+  }
+
+  &__col-right {
+    max-width: 300px;
+    margin: 0 0 0 50px;
+
+    &__mostviewed {
+      .ant-card-head {
+        background-color: rgb(25, 12, 71);
+        color: white;
+      }
+      margin-top: 10px;
+    }
+  }
+}

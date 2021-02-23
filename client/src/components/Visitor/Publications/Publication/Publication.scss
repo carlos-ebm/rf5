@@ -1,0 +1,13 @@
+@import "../../../../scss/index.scss";
+
+.card-publication{
+    margin-left: 40px;
+    text-align: justify;
+
+    &__image{
+        max-width: 100%;
+        margin-left: auto;
+        margin-right: auto;
+    }
+
+}

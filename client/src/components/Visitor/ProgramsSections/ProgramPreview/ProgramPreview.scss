@@ -1,0 +1,34 @@
+
+.card-program{
+
+    margin-left: 10px;
+    margin-top: 40px;
+    max-height: 350px;
+
+    .ant-card-body{
+        margin-top: 20px;
+        color: rgb(194, 173, 173);
+        text-align:center;
+        padding: 10px;
+    }
+
+    .ant-list-item-extra{
+        //margin-top: 20px;
+        margin-left: -5px;
+        //padding: 10px;
+        text-align:center;
+    }
+
+    .ant-list-item-main{
+        text-align:center;
+    }
+
+    &__title{
+        //border-style:solid;
+        //border-radius: 10px;
+        //border-width: 1px;
+        //padding: 3px;
+        //background-color: rgb(243, 243, 243);
+    }
+
+}

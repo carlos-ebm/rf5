@@ -1,0 +1,30 @@
+@import "../../../scss/index.scss";
+
+.list-users__card{
+  &-modal{
+   
+  }
+}
+
+
+.button {
+    margin: 5px 0 10px 0;
+    border-radius: 5px;
+    background-color: $primary-color-dark;
+    color: $font-light;
+    border: hidden;
+  
+    &:hover {
+      background-color: $primary-color-hover;
+      color: $font-light;
+    }
+    &:focus,
+    &:active {
+      background-color: $primary-color;
+      color: $font-light;
+      border: 0;
+    }
+  }
+  .table {
+    width: 100%;
+  }

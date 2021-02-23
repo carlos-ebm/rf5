@@ -1,0 +1,29 @@
+@import "../../../scss/index.scss";
+
+.row {
+    &__left-news {
+        text-align: left;
+
+        justify-content: center;
+    }
+
+    &__right-news {
+      max-width: 300px;
+      margin: 10px 0 0 50px;
+      &__ads {
+      }
+      &__related {
+        .ant-card-head{
+            background-color: rgb(25, 12, 71);
+            color: white;
+        }
+        margin-top: 10px;
+      }
+    }
+  }
+  
+.sponsors {
+  margin-top: 40px;
+  text-align: center;
+  width: 100%;
+}

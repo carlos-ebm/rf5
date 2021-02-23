@@ -1,0 +1,19 @@
+@import "../../../scss/index.scss";
+
+.user-editprofile{
+    display: flex;
+    height: 100vh;
+
+    &__card{
+        text-align: center;
+        border: hidden;
+        //background-color: rgba(187, 181, 181, 0.397);
+
+        @media (max-width: $media-breackpoint-up-md){
+        width: 100%;
+        }
+
+        }
+
+    
+}

@@ -1,0 +1,24 @@
+@import "../../../scss/index.scss";
+
+.menu-top {
+  display: flex;
+  height: 100%;
+  width: 100%;
+  font-size: 100%;
+
+  &__item{ 
+  top: 0;
+  bottom: 0;
+  padding: 0;
+
+  &:hover {
+    
+  }
+
+  &focus,
+  &active {
+    color: $font-light;
+  }
+  //background-color: black;
+  }
+}

@@ -1,0 +1,60 @@
+@import "../../../../scss/index.scss";
+
+.publication-form{
+    text-align: center;
+    .ant-form-item {
+      &:nth-child(0),
+      &:last-of-type {
+        margin: 0;
+      }
+    }
+    &__title{
+        font-size: 110%;
+    }
+    &__row{
+        &__col{
+            &__card{
+              //max-width: 850px;
+                margin: 10px;
+                &__input{
+                    font-size: 85%;
+                    .ant-input-prefix {
+                      i {
+                        font-size: 0em + 22px / $defaultFontSize;
+                      }
+                    }
+          
+                    input {
+                      font-size: 0em + 20px / $defaultFontSize;
+                      &:focus {
+                        border-color: $primary-color;
+                        box-shadow: none;
+                      }
+                    }
+                }
+                &__card{
+                  margin:auto;
+                    min-height: 300px;
+                }
+            }
+            &__button {
+                margin-top: 10px;
+                border-radius: 5px;
+                background-color: $primary-color-dark;
+                color: $font-light;
+                border: hidden;
+            
+                &:hover {
+                  background-color: $primary-color-hover;
+                  color: $font-light;
+                }
+                &:focus,
+                &:active {
+                  background-color: $primary-color;
+                  color: $font-light;
+                  border: 0;
+                }
+              }
+        }
+    }
+}

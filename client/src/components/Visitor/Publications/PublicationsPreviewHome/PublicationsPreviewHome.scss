@@ -1,0 +1,14 @@
+@import "../../../../scss/index.scss";
+
+.row-principal{
+    margin-top: 10px;
+}
+
+.row-secondary{
+    margin-top: 10px;
+    &__item{
+        //text-align: center;
+        //background-color: yellow;
+        max-width: 400px;
+    }
+}

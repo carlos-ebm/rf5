@@ -1,0 +1,17 @@
+@import "../../../../scss/index.scss";
+
+.card-principal{
+   
+   width: 1000px;
+   max-height: 600px;
+
+   &__image{
+      max-height: 400px;
+   }
+   /* margin: 0;
+    max-width: 1000px;
+    
+    &__image{
+       height: 300px;
+    }*/
+}
