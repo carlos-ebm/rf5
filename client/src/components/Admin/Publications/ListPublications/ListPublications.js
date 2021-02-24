@@ -44,6 +44,10 @@ export default function ListPublication(props) {
 
   //console.log(users);
 
+  const reload = ()=>{
+    window.location.reload();
+  }
+
   return (
     <Card className="list-publications__card">
       <div className="list-publications__card-header">
@@ -66,6 +70,7 @@ export default function ListPublication(props) {
         title={modalTitle}
         isVisible={isVisibleModal}
         setIsVisible={setIsVisibleModal}
+        onCancel={reload}
       >
         {modalContent}
       </Modal>
@@ -188,7 +193,8 @@ function Publication(props) {
               publication.section==3 ? "Ciencia" : 
               publication.section==4 ? "Deportes" :"..." } | 
               Creado ${publication.creationDate ? moment(publication.creationDate).calendar() : "..."} -
-              Modificado ${publication.modificationDate ? moment(publication.modificationDate).calendar() : "..."} |  
+              Modificado ${publication.modificationDate ? moment(publication.modificationDate).calendar() : "..."} -
+              Programado para ${publication.publicationDate ? moment(publication.publicationDate).calendar() : "..."} |   
               Vista ${publication.views} ${publication.views==1 ? "vez": "veces"} 
             `}
         />

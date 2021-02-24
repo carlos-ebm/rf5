@@ -289,6 +289,7 @@ function AddForm(props) {
                 className="publication-form__row__col__card"
               >
                 <Form.Item>
+                  <p><i>Si decea programar la publicación debe seleccionar la opción Oculto</i></p>
                   <RadioGroup name="visibility">
                     <Radio value={1}>Publico</Radio>
 
@@ -323,6 +324,7 @@ function AddForm(props) {
                 className="publication-form__row__col__card"
               >
                 <Form.Item>
+                  <p><i>La publicación permanecera oculta hasta la fecha seleccionada</i></p>
                   <DatePicker
                   locale="es" 
                   selected={date} 

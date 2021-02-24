@@ -3,19 +3,23 @@ import "./International.scss";
 import News from "../../../components/Visitor/News";
 import ListMostViewed from "../../../components/Visitor/MostViewed/ListMostViewed";
 import ListSections from "../../../components/Visitor/Sections/ListSections";
-import {getPublicationsSectionVisitorApi} from "../../../api/publication";
+import {getPublicationsSectionVisitorApi, getPublicationsMostviewedSectionVisitorApi} from "../../../api/publication";
 
 
 import { Row, Col, Card } from "antd";
 
 export default function International() {
   const [publications, setPublications] = useState([]);
+  const [publicationsMostviewed, setPublicationsMostviewed] = useState([]);
 
   useEffect(() => {
     getPublicationsSectionVisitorApi(2).then((response) => {
       setPublications(response);
     });
-  });
+    getPublicationsMostviewedSectionVisitorApi(2).then((response) => {
+      setPublicationsMostviewed(response);
+    });
+  },[]);
 
   return (
     <>
@@ -27,8 +31,8 @@ export default function International() {
           <Card className="row__right-news__ads">
             <h1>Anuncios</h1>
           </Card>
-          <Card className="row__right-news__related" title="Noticias relacionadas">
-            <ListMostViewed publications={publications}/>
+          <Card className="row__right-news__related" title="Noticias más vistas">
+            <ListMostViewed publicationsMostviewed={publicationsMostviewed}/>
           </Card>
           </Col>
       </Row>

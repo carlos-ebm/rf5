@@ -158,11 +158,10 @@ export function getMostViewedPublicationBySectionVisitorApi(section) {
 
 function getLastPublicationBySection(result, section) {
   const result2 = result.publications.filter(
-    (publications) => publications.section == section
+    (publications) => (publications.section==section && publications.visibility=="1")
   );
   return (result2[result2.length-1]);
 }
-
 export function getPublicationsSectionVisitorApi(section) {
   const url = `${basePath}/${apiVersion}/getPublicationsVisitor`;
 
@@ -178,11 +177,69 @@ export function getPublicationsSectionVisitorApi(section) {
       return response.json();
     })
     .then((result) => {
-      return getPublicationBySection(result, section);
+      return getPublicationsBySection(result, section);
     })
     .catch((err) => {
       return err.message;
     });
+}
+
+function getPublicationsBySection(result, section) {
+  const publicationsSection = result.publications.filter(
+    (publications) => (publications.section==section && publications.visibility=="1")
+  );
+  var publicationsSectionfifo = [];
+  for(let i=publicationsSection.length-1; i>=0; i--){
+      publicationsSectionfifo.push(publicationsSection[i]);
+  }
+  return publicationsSectionfifo;
+}
+
+export function getPublicationsMostviewedSectionVisitorApi(section) {
+  const url = `${basePath}/${apiVersion}/getPublicationsVisitor`;
+
+  const params = {
+    method: "GET",
+    headers: {
+      "Content-Type": "application/json",
+    },
+  };
+
+  return fetch(url, params)
+    .then((response) => {
+      return response.json();
+    })
+    .then((result) => {
+      return getPublicationsMostviewedBySection(result, section);
+    })
+    .catch((err) => {
+      return err.message;
+    });
+}
+
+function getPublicationsMostviewedBySection(result, section) {
+  const publicationsSection = result.publications.filter(
+    (publications) => (publications.section==section && publications.visibility=="1")
+  );
+  var threeMostviewedPublications = [];
+  var aux = publicationsSection[0];
+  var deleteIndex = 0;
+  for(let j=1; j<=3; j++){
+    deleteIndex=0;
+    for(let i=0; i<publicationsSection.length; i++){
+      for(let k=0; k<publicationsSection.length; k++){
+        if(publicationsSection[k].views>publicationsSection[i].views){
+          aux = publicationsSection[k];
+          //console.log(aux);
+          deleteIndex=k;
+        } 
+      }
+    }
+    threeMostviewedPublications.push(aux);
+    publicationsSection[deleteIndex].views=-1000; 
+  }
+  //console.log(threeMostviewedPublications)
+  return threeMostviewedPublications;
 }
 
 export function deletePublicationApi(token, publicationId) {
@@ -316,10 +373,6 @@ export function setPublicPublicationApi(publication, publicationId) {
     });
 }
 
-function getPublicationBySection(result, section) {
-  const result2 = result.publications.filter(
-    (publications) => publications.section == section
-  );
-  return result2;
-}
+                                              
+
 

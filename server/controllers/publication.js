@@ -49,7 +49,7 @@ function getPublicationsVisitor(req, res) {
 }
 
 function getPrincipalPublicationVisitor(req, res) {
-  Publication.find().then((publications) => {
+  Publication.find({visibility: "1"}).then((publications) => {
     if (!publications) {
       res.status(400).send({ message: "No se encontro ninguna publicación." });
     } else {
@@ -60,7 +60,7 @@ function getPrincipalPublicationVisitor(req, res) {
 }
 
 function getSecondaryPublicationsVisitor(req, res) {
-  Publication.find().then((publications) => {
+  Publication.find({visibility: "1"}).then((publications) => {
     if (!publications) {
       res.status(400).send({ message: "No se encontro ninguna publicación." });
     } else {

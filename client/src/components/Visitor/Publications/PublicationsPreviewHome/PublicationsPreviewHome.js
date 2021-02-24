@@ -8,7 +8,7 @@ import PublicationPreviewPrincipal from "../PublicationPreviewPrincipal";
 import Publications from "../../../../pages/Admin/Publications/Publications";
 
 export default function PublicationsPreviewHome(props) {
-  const { publicationPrincipal, publications } = props;
+  const { publicationPrincipal, secondaryPublications } = props;
 
   return (
     <>
@@ -32,7 +32,7 @@ export default function PublicationsPreviewHome(props) {
             xxl: 2,
             column: 2
           }}
-          dataSource={publications}
+          dataSource={secondaryPublications}
           renderItem={(publication) => (
             <List.Item>
              <div className="row-secondary__item" ><PublicationPreview publication={publication} /></div>

@@ -56,7 +56,7 @@ export default function LayoutAdmin(props) {
         </Layout>
         <Layout className="layout-admin">
           <Footer className="layout-admin__footer">
-            Radio F5 - Copyright 2021 | By EDEX & Rodrigo Ordenes{" "}
+            Radio F5 - Copyright 2021 | By Bortex{" "}
           </Footer>
         </Layout>
       </Layout>

@@ -34,80 +34,60 @@ export default function Home() {
       setSecondaryPublications(response.secondaryPublications);
     });
     getPrincipalPublicationVisitorApi().then((response)=>{
-      setPublicationPrincipal(response.publication);
+      if(response.publication){
+        setPublicationPrincipal(response.publication);
+      }
     });
-  });
-
-  useEffect(()=>{
     getMostViewedPublicationBySectionVisitorApi(1).then((response)=>{
+      if(response){
       setLastNationalPublication(response);
-    })
+      }
+    });
     getMostViewedPublicationBySectionVisitorApi(2).then((response)=>{
+      if(response){
       setLastInternationalPublication(response);
-    })
+      }
+    });
     getMostViewedPublicationBySectionVisitorApi(3).then((response)=>{
+      if(response){
       setLastSciencePublication(response);
-    })
+      }
+    });
     getMostViewedPublicationBySectionVisitorApi(4).then((response)=>{
+      if(response){
       setLastSportsPublication(response);
-    })
-  })
+      }
+    });
+  },[]);
 
   const lastPublications = [];
   if(lastNationalPublication){
-    //if(lastNationalPublication.visibility==1){
       lastPublications.push(lastNationalPublication);
-    //}
   }
   if(lastInternationalPublication){
-    //if(lastInternationalPublication.visibility==1){
      lastPublications.push(lastInternationalPublication);
-    //}
   }
   if(lastSciencePublication){
-    //if(lastSciencePublication.visibility==1){
      lastPublications.push(lastSciencePublication)
-    //}
   }
   if(lastSportsPublication){
-    //if(lastSportsPublication.visibility==1){
       lastPublications.push(lastSportsPublication);
-    //}
-  }
-  var i=34;
-  while (i < publications.length){
-
-  console.log(moment(publications[i].publicationDate));
-  
-  var dateB = new Date();
-  var dateC = moment(publications[i].publicationDate);
-  var difCB = dateC.diff(dateB)
-
-  console.log('Difference is ', dateC.diff(dateB),'milliseconds');
-
-  if(difCB <= 0){
-    setPublicPublicationApi(publications[i],publications[i]._id);
-  }
-  i++;
   }
 
-  //console.log(publications);
-  /*var i = 29;
-  while (i < publications.length){
-    console.log(i);
-    console.log(publications[i].publicationDate);
-    console.log(moment().format('HH:mm:ss'));
-    console.log(moment().format('L'));
-    console.log(moment(publications[i].publicationTime).format('HH:mm:ss'));
-    console.log(moment(publications[i].publicationDate).format('L'));
-    console.log(moment(publications[i].publicationTime).diff(publications[i].publicationDate));
-    //str1.localeCompare(str2);
 
-    //if(moment(publications[i].publicationDate).format('L') >= moment().format('L'))
-
+  useEffect(()=>{
+    var i=0;
+    while (i < publications.length){
+    var dateB = new Date();
+    var dateC = moment(publications[i].publicationDate);
+    var difCB = dateC.diff(dateB)
+    //console.log(difCB);
+      if(difCB <= 0){
+        setPublicPublicationApi(publications[i],publications[i]._id);
+      }
     i++;
-  }*/
-
+    }
+  })
 
   return (
 <>
@@ -117,7 +97,7 @@ export default function Home() {
         </Col>
 
         <Col className="row__col-right" span={6}>
-          <Card className="row__col-right__mostviewed" title="Noticias más vistas">
+          <Card className="row__col-right__mostviewed" title="Noticias recientes">
             <ListMostViewed lastPublications={lastPublications}/>
           </Card>
         </Col>

@@ -3,6 +3,9 @@ import { Layout } from "antd";
 import MenuTop from "../components/Visitor/MenuTop";
 import BarTop from "../components/Global/BarTop";
 import SocialBar from "../components/Visitor/SocialBar";
+import {
+  CodeFilled
+} from "@ant-design/icons";
 
 
 
@@ -35,7 +38,7 @@ export default function LayoutBasic(props) {
       </Layout>
       <Layout>
         <Footer className="layout-basic__footer">
-          Radio F5 - Copyright 2021 | By EDEX & Rodrigo Ordenes{" "}
+          Radio F5 - Copyright 2021 | By Bortex{" "} <CodeFilled />
         </Footer>
       </Layout>
     </Layout>

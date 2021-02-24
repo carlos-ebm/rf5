@@ -11,6 +11,11 @@ import "react-draft-wysiwyg/dist/react-draft-wysiwyg.css";
 import draftToHtml from "draftjs-to-html";
 import htmlToDraft from "html-to-draftjs";
 import { useDropzone } from "react-dropzone";
+
+import DatePicker from "react-datepicker";
+
+import { registerLocale, setDefaultLocale } from  "react-datepicker";
+
 import {
   Form,
   Input,
@@ -40,13 +45,23 @@ import NoImage from "../../../../assets/img/png/no-image.png";
 import { getAccessTokenApi } from "../../../../api/auth";
 
 import "./EditPublicationForm.scss";
+
 import { updatePublicationApi, getImageApi, uploadImageApi } from "../../../../api/publication";
+
+import "react-datepicker/dist/react-datepicker.css";
+import moment from "moment";
+import "moment/locale/es";
+import es from 'date-fns/locale/es';
+
+registerLocale('es', es);
+
 const RadioGroup = Radio.Group;
 
 export default function EditPublicationForm(props) {
   const { publication, setIsVisibleModal, setReloadPublications } = props;
   const [publicationData, setPublicationData] = useState({});
   const [image, setImage] = useState(null);
+  const [date, setDate] = useState(moment(publication.publicationDate).toDate());
 
   //Editor de texto
   const blocksFromHtml = htmlToDraft(publication.content);
@@ -68,6 +83,7 @@ export default function EditPublicationForm(props) {
       visibility: publication.visibility,
       section: publication.section,
       modificationDate: cDate,
+      publicationDate: publication.publicationDate,
     });
   }, [publication]);
 
@@ -91,6 +107,7 @@ export default function EditPublicationForm(props) {
   const updatePublication = (e) => {
     const token = getAccessTokenApi();
     let publicationUpdate = publicationData;
+    publicationUpdate.publicationDate = date;
 
     if (
       !publicationUpdate.title ||
@@ -105,14 +122,6 @@ export default function EditPublicationForm(props) {
       });
     }else{
      updatePublicationApi(token, publicationUpdate, publication._id).then((result) => {
-        if (typeof image.file === "object") {
-          uploadImageApi(token, image.file, publication._id).then(() => {
-          });
-        }
-        notification["success"]({
-          message: "Publicación editada con exito.",
-        });
-        setIsVisibleModal(false);
         setReloadPublications(true);
         window.location.href="/admin/publications";
       });
@@ -128,6 +137,8 @@ export default function EditPublicationForm(props) {
       stateEditor={stateEditor}
       setStateEditor={setStateEditor}
       updatePublication={updatePublication}
+      date={date}
+      setDate={setDate}
     />
     </>
   );
@@ -193,6 +204,8 @@ function EditForm(props) {
     stateEditor,
     setStateEditor,
     updatePublication,
+    date,
+    setDate
   } = props;
 
   const onEditorStateChange = (content) => {
@@ -291,6 +304,7 @@ function EditForm(props) {
                 className="publication-form__row__col__card"
               >
                 <Form.Item>
+                <p><i>Para programar la publicación debe seleccionar la opción Oculto</i></p>
                   <RadioGroup
                     name="visibility"
                     onChange={(e) =>
@@ -308,7 +322,7 @@ function EditForm(props) {
                 </Form.Item>
               </Card>
             </Col>
-            <Col flex={3}>
+            <Col flex={2}>
               {" "}
               <Card
                 type="inner"
@@ -332,6 +346,30 @@ function EditForm(props) {
                     <Radio value="3">Ciencia</Radio>
                     <Radio value="4">Deporte</Radio>
                   </RadioGroup>
+                </Form.Item>
+              </Card>
+            </Col>
+            <Col flex={1}>
+              {" "}
+              <Card
+                type="inner"
+                size="small"
+                title="Fecha de publicacion"
+                className="publication-form__row__col__card"
+              >
+                <Form.Item>
+                  <p><i>La publicación permanecera oculta hasta la fecha seleccionada</i></p>
+                  <p>Programado para: {moment(publicationData.publicationDate).calendar()}</p>
+                  <DatePicker
+                  locale="es" 
+                  selected={date} 
+                  showTimeSelect
+                  timeFormat="HH:mm"
+                  injectTimes={[moment().hours(23).minutes(59)]}
+                  dateFormat="MMMM d, yyyy h:mm aa"
+                  onChange={date=>{
+                    setDate(date)
+                  }}/>
                 </Form.Item>
               </Card>
             </Col>
